@@ -10,6 +10,8 @@ import registerEvents from '@shopgate/pwa-core/commands/registerEvents';
 import redirectRoute from '../actions/history/redirectRoute';
 import resetHistory from '../actions/history/resetHistory';
 import { userDidLogin$, userDidLogout$ } from '../streams/user';
+import { shopifyDidRespond$ } from '../streams/shopify';
+import { hasShopifyCheckout } from '../selectors/shopify';
 import { appDidStart$ } from '../streams/app';
 
 /**
@@ -20,7 +22,11 @@ export default function history(subscribe) {
   /**
    * Gets triggered when the user did log in.
    */
-  subscribe(userDidLogin$, ({ dispatch }) => {
+  const shouldRedirect$ = hasShopifyCheckout()
+    ? userDidLogin$.zip(shopifyDidRespond$).map(([first]) => first)
+    : userDidLogin$;
+
+  subscribe(shouldRedirect$, ({ dispatch }) => {
     dispatch(redirectRoute());
   });
 

@@ -72,6 +72,16 @@ export const RECEIVE_USER = 'RECEIVE_USER';
 export const ERROR_USER = 'ERROR_USER';
 
 /**
+ * --------- SHOPIFY ----------
+ */
+export const REQUEST_SHOPIFY_LOGIN = 'REQUEST_SHOPIFY_LOGIN';
+export const SUCCESS_SHOPIFY_LOGIN = 'SUCCESS_SHOPIFY_LOGIN';
+export const ERROR_SHOPIFY_LOGIN = 'ERROR_SHOPIFY_LOGIN';
+export const REQUEST_SHOPIFY_LOGOUT = 'REQUEST_SHOPIFY_LOGOUT';
+export const SUCCESS_SHOPIFY_LOGOUT = 'SUCCESS_SHOPIFY_LOGOUT';
+export const ERROR_SHOPIFY_LOGOUT = 'ERROR_SHOPIFY_LOGOUT';
+
+/**
  * --------- URL ------------
  */
 export const REQUEST_URL = 'REQUEST_URL';
