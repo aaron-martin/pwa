@@ -13,4 +13,6 @@ export default css({
   right: 0,
   bottom: 0,
   left: 0,
+  opacity: 0,
+  transition: 'opacity 300ms cubic-bezier(0.25, 0.1, 0.25, 1)',
 }).toString();
