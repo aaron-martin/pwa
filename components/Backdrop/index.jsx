@@ -7,7 +7,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Transition from 'react-inline-transition-group';
+import Transition from 'react-transition-group/Transition';
 import styles from './style';
 
 /**
@@ -54,31 +54,44 @@ class Backdrop extends Component {
    * @returns {JSX}
    */
   render() {
+    // Convert opacity value to be CSS compatible (0 -> 1).
     const opacity = (this.props.opacity / 100);
 
-    const transition = {
-      base: {
-        background: this.props.color,
+    const defaultStyles = {
+      background: this.props.color,
+      transitionDuration: `${this.props.duration}ms`,
+      zIndex: this.props.level,
+    };
+
+    const transitionStyles = {
+      entering: {
+        opacity,
+      },
+      entered: {
+        opacity,
+      },
+      exited: {
+        top: '100%', // Move the element off-screen when not visible.
         opacity: 0,
-        transition: `opacity ${this.props.duration}ms ease-out`,
-        zIndex: this.props.level,
       },
-      appear: {
-        opacity,
-      },
-      enter: {
-        opacity,
-      },
-      leave: {
+      exiting: {
         opacity: 0,
       },
     };
 
     return (
-      <Transition childrenStyles={transition}>
-        {this.props.isVisible ?
-          <div aria-hidden className={styles} onClick={this.props.onClick} /> : null
-        }
+      <Transition in={this.props.isVisible} timeout={this.props.duration}>
+        {state => (
+          <div
+            aria-hidden
+            className={styles}
+            style={{
+              ...defaultStyles,
+              ...transitionStyles[state],
+            }}
+            onClick={this.props.onClick}
+          />
+        )}
       </Transition>
     );
   }
