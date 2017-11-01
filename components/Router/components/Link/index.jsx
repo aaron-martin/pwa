@@ -8,7 +8,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ParsedLink from '../../helpers/parsed-link';
-import style from './style';
+import getStyle from './style';
 
 /**
  * Link component.
@@ -19,11 +19,11 @@ export default class Link extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     href: PropTypes.string.isRequired,
-    className: PropTypes.string,
+    styles: PropTypes.shape(),
   };
 
   static defaultProps = {
-    className: '',
+    styles: {},
   };
 
   /**
@@ -42,11 +42,12 @@ export default class Link extends PureComponent {
    * @returns {XML}
    */
   render() {
-    const { className, children } = this.props;
+    const { styles, children } = this.props;
+    const style = getStyle(styles);
 
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-      <div role="link" className={`${style} ${className}`} onClick={this.handleOpenLink}>
+      <div role="link" className={`${style}`} onClick={this.handleOpenLink}>
         {children}
       </div>
     );

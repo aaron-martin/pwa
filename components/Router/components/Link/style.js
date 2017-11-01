@@ -7,11 +7,22 @@
 
 import { css } from 'glamor';
 
-export default css({
-  padding: 0,
-  margin: 0,
-  border: 'none',
-  textAlign: 'left',
-  alignItems: 'stretch',
-  width: '100%',
-}).toString();
+export default (styles) => {
+  let style = {
+    padding: 0,
+    margin: 0,
+    border: 'none',
+    textAlign: 'left',
+    alignItems: 'stretch',
+    cursor: 'pointer',
+  };
+
+  if (styles) {
+    style = {
+      ...style,
+      styles,
+    };
+  }
+
+  return css(style).toString();
+};
