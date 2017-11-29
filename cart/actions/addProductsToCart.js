@@ -7,6 +7,7 @@
 
 import PipelineRequest from '@shopgate/pwa-core/classes/PipelineRequest';
 import { logger } from '@shopgate/pwa-core/helpers';
+import { getCurrentFormattedOptions } from '../../product/selectors/options';
 import addProductsToCart from '../action-creators/addProductsToCart';
 import successAddProductsToCart from '../action-creators/successAddProductsToCart';
 import errorAddProductsToCart from '../action-creators/errorAddProductsToCart';
@@ -19,13 +20,20 @@ import { getProductPendingCount } from '../selectors';
  * @return {Function} A redux thunk.
  */
 const addToCart = productData => (dispatch, getState) => {
-  const pendingProductCount = getProductPendingCount(getState());
+  const state = getState();
+  const pendingProductCount = getProductPendingCount(state);
+  const productOptions = getCurrentFormattedOptions(state);
 
-  dispatch(addProductsToCart(productData));
+  const cartData = [{
+    ...productData[0],
+    ...productOptions && { properties: productOptions },
+  }];
+
+  dispatch(addProductsToCart(cartData));
   dispatch(setCartProductPendingCount(pendingProductCount + 1));
 
   new PipelineRequest('addProductsToCart')
-    .setInput({ products: productData })
+    .setInput({ products: cartData })
     .dispatch()
     .then(({ messages }) => {
       dispatch(successAddProductsToCart());
@@ -36,11 +44,11 @@ const addToCart = productData => (dispatch, getState) => {
          * but a messages array within the response payload. So by now we also have to dispatch
          * the error action here.
          */
-        dispatch(errorAddProductsToCart(productData, messages));
+        dispatch(errorAddProductsToCart(cartData, messages));
       }
     })
     .catch((error) => {
-      dispatch(errorAddProductsToCart(productData));
+      dispatch(errorAddProductsToCart(cartData));
       logger.error('addProductsToCart', error);
     });
 };

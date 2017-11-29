@@ -96,6 +96,26 @@ export const getProductOptions = createSelector(
 );
 
 /**
+ * Gets the current product options formatted for the cart.
+ * @param {Object} state The application state.
+ * @returns {boolean}
+ */
+export const getCurrentFormattedOptions = createSelector(
+  getProductOptions,
+  getCurrentProductOptions,
+  (options, values) => {
+    if (!options) {
+      return null;
+    }
+
+    return options.map(({ id, type }) => ({
+      id,
+      value: values[id],
+      type,
+    }));
+  });
+
+/**
  * Checks if the product has any options.
  * @param {Object} state The application state.
  * @returns {boolean}
