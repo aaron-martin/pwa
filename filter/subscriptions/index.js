@@ -31,7 +31,7 @@ import setActiveFilters from '../action-creators/setActiveFilters';
 import removeActiveFilters from '../action-creators/removeActiveFilters';
 import resetActiveFilters from '../action-creators/resetActiveFilters';
 import { getActiveFilters, getFilterHash } from '../selectors';
-import { FILTER_PATH } from '../constants';
+import { FILTER_PATH, FILTER_PATH_REGEX } from '../constants';
 import { CATEGORY_PATH } from '../../category/constants';
 import { SEARCH_PATH } from '../../search/constants';
 
@@ -50,12 +50,12 @@ export default function filters(subscribe) {
   /**
    * Gets triggered when entering the filter route.
    */
-  const filterRouteDidEnter$ = routeDidEnter(FILTER_PATH);
+  const filterRouteDidEnter$ = routeDidEnter(FILTER_PATH_REGEX);
 
   /**
    * Gets triggered when leaving the filter route.
    */
-  const filterRouteDidLeave$ = routeDidLeave(FILTER_PATH);
+  const filterRouteDidLeave$ = routeDidLeave(FILTER_PATH_REGEX);
 
   /**
    * Gets triggered when entering a filterable route by going forward in, or replacing the history.

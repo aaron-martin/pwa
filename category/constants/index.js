@@ -7,6 +7,8 @@
 
 export const CATEGORY_PATH = '/category';
 
+export const CATEGORY_PATH_REGEX = new RegExp(`^${CATEGORY_PATH}/?[^/]*/?$`, 'g');
+
 export const CATEGORY_LIFETIME = 3600000; // 1 hour in milliseconds
 
 export const SET_CURRENT_CATEGORY_ID = 'SET_CURRENT_CATEGORY_ID';

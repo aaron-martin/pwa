@@ -55,9 +55,8 @@ const getSettingsFromProps = (_, props = {}) => props.settings;
 export const getCurrentCategoryId = createSelector(
   getParamsFromProps,
   getSettingsFromProps,
-  state => (state.category ? state.category.currentCategoryId : null),
   state => (state.history ? state.history.pathname : null),
-  (params, settings, categoryId, pathname) => {
+  (params, settings, pathname) => {
     if (params && params.categoryId) {
       return hex2bin(params.categoryId) || null;
     }
@@ -66,13 +65,11 @@ export const getCurrentCategoryId = createSelector(
       return settings.categoryNumber;
     }
 
-    if (!categoryId) {
-      if (pathname && pathname.startsWith(CATEGORY_PATH)) {
-        return hex2bin(pathname.split('/')[2]) || null;
-      }
+    if (pathname && pathname.startsWith(CATEGORY_PATH)) {
+      return hex2bin(pathname.split('/')[2]) || null;
     }
 
-    return categoryId;
+    return null;
   }
 );
 

@@ -6,6 +6,7 @@
  */
 
 export const FILTER_PATH = '/filter';
+export const FILTER_PATH_REGEX = new RegExp(`.*/${FILTER_PATH}$`, 'g');
 
 export const SET_FILTER_HASH = 'SET_FILTER_HASH';
 export const SET_FILTER_INDEX = 'SET_FILTER_INDEX';
