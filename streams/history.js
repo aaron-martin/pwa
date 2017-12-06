@@ -38,6 +38,20 @@ export const routeDidChange$ = historyDidUpdate$
   }));
 
 /**
+ * Checks a given pathname if it matches the provided search.
+ * @param {string|RegExp} search String or RegExp that should match
+ * @param {string} pathname Path which will be searched
+ * @return {boolean}
+ */
+const checkPathname = (search, pathname) => {
+  if (search instanceof RegExp) {
+    return search.test(pathname);
+  }
+
+  return pathname.startsWith(search);
+};
+
+/**
  * Gets triggered when a route has entered.
  * @param {string} route The route path.
  * @type {Function}
@@ -46,8 +60,8 @@ export const routeDidChange$ = historyDidUpdate$
 export const routeDidEnter = route => routeDidChange$
   .filter(({ initialEnter, pathname, prevPathname }) => {
     // Check if both path names start with the watched route.
-    const pathnameMatch = pathname.startsWith(route);
-    const prevPathnameMatch = prevPathname.startsWith(route);
+    const pathnameMatch = checkPathname(route, pathname);
+    const prevPathnameMatch = checkPathname(route, pathname);
 
     // Check if the previous path doesn't contain the route, but the next one does.
     const routeChanged = (initialEnter && pathnameMatch) || (!prevPathnameMatch && pathnameMatch);
@@ -65,8 +79,8 @@ export const routeDidEnter = route => routeDidChange$
 export const routeDidLeave = route => routeDidChange$
   .filter(({ pathname, prevPathname }) => {
     // Check if both path names start with the watched route.
-    const pathnameMatch = pathname.startsWith(route);
-    const prevPathnameMatch = prevPathname.startsWith(route);
+    const pathnameMatch = checkPathname(route, pathname);
+    const prevPathnameMatch = checkPathname(route, pathname);
 
     // Check if the previous path contains the route, but the next one doesn't.
     const routeChanged = prevPathnameMatch && !pathnameMatch;
