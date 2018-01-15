@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
 import { main$ } from '@shopgate/pwa-common/streams/main';
 import {
   RECEIVE_PRODUCT,
