@@ -7,6 +7,7 @@
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/map';
@@ -14,6 +15,8 @@ import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/zip';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/shareReplay';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/distinctUntilChanged';
 import { mainSubject } from '../store/observable-middleware';
 
 /**
@@ -21,3 +24,5 @@ import { mainSubject } from '../store/observable-middleware';
  * @type {Observable}
  */
 export const main$ = Observable.from(mainSubject);
+
+export { Observable };
