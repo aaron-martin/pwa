@@ -26,6 +26,13 @@ const native = (url) => {
 const pushNotification = () => {};
 
 /**
+ * The eventLink handler is intended to be used for situations where no route change happens.
+ * In that case only the openLink event is triggered and the related logic runs within
+ * steam subscriptions.
+ */
+const eventLink = () => {};
+
+/**
  * External link that should be opened in the in app browser.
  * @param {string} url Url that should be opened.
  */
@@ -115,4 +122,5 @@ export default {
   legacyLink,
   reactRouter,
   pushNotification,
+  eventLink,
 };

@@ -7,7 +7,10 @@
 
 import { OPEN_LINK, UPDATE_HISTORY } from '../constants/ActionTypes';
 import { getHistoryPathname, getHistoryAction } from '../selectors/history';
-import { REGISTER_PATH } from '../constants/RoutePaths';
+import {
+  REGISTER_PATH,
+  SCANNER_PATH,
+} from '../constants/RoutePaths';
 import { main$ } from './main';
 
 /**
@@ -101,3 +104,9 @@ export const openedRegisterLink$ = openedLink$
     action.options &&
     action.options.url &&
     action.options.url === REGISTER_PATH);
+
+export const openedScannerLink$ = openedLink$
+  .filter(({ action }) =>
+    action.options &&
+    action.options.url &&
+    action.options.url === SCANNER_PATH);

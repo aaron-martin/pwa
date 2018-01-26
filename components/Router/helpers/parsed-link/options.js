@@ -7,6 +7,7 @@
 
 import {
   INDEX_PATH,
+  SCANNER_PATH,
 } from '../../../../constants/RoutePaths';
 
 /**
@@ -140,7 +141,12 @@ function getSimpleLinkParserOptions(path, queryParams, url) {
         url: '/register/default',
       });
       break;
-
+    case 'scanner':
+      this.addLinkAction('eventLink', {
+        url: SCANNER_PATH,
+        queryParams,
+      });
+      break;
     default:
       this.addLinkAction('reactRouter', {
         url,
