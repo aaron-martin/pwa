@@ -45,6 +45,7 @@ export const ERROR_PAGE_CONFIG = 'ERROR_PAGE_CONFIG';
 /**
  * ------- HISTORY --------
  */
+export const NAVIGATE = 'NAVIGATE';
 export const UPDATE_HISTORY = 'UPDATE_HISTORY';
 export const HISTORY_PUSH_ACTION = 'PUSH';
 export const HISTORY_POP_ACTION = 'POP';

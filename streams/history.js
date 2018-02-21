@@ -5,10 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { OPEN_LINK, UPDATE_HISTORY } from '../constants/ActionTypes';
+import { OPEN_LINK, UPDATE_HISTORY, NAVIGATE } from '../constants/ActionTypes';
 import { getHistoryPathname, getHistoryAction } from '../selectors/history';
 import { REGISTER_PATH } from '../constants/RoutePaths';
 import { main$ } from './main';
+
+/**
+ * Gets triggered when a navigation event is intended.
+ * @type {Observable}
+ */
+export const navigate$ = main$
+  .filter(({ action }) => action.type === NAVIGATE);
+
+/**
+ * Gets triggered when the history is updated.
+ * @type {Observable}
+ */
+export const conductorDidPush$ = main$
+  .filter(({ action }) => action.type === 'CONDUCTOR_PUSH');
 
 /**
  * Gets triggered when the history is updated.

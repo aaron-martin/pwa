@@ -9,6 +9,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import syncRouter from '@virtuous/redux-conductor';
 import initSubscribers from './subscriptions';
 import {
   appDidStart,
@@ -20,7 +21,6 @@ import HistoryStack from './components/Router/helpers/HistoryStack';
 import fetchClientInformation from './actions/client/fetchClientInformation';
 import configureStore from './store';
 import I18n from './components/I18n';
-import Router from './components/Router';
 import smoothscrollPolyfill from './helpers/scrollPolyfill';
 
 injectTapEventPlugin();
@@ -57,6 +57,8 @@ class App extends PureComponent {
 
     this.store = configureStore(props.reducers);
 
+    syncRouter(this.store);
+
     this.store.dispatch(appWillStart(history.location));
 
     // Start synchronization of the history stack.
@@ -89,9 +91,9 @@ class App extends PureComponent {
     return (
       <Provider store={this.store}>
         <I18n.Provider locales={this.props.locale} lang={process.env.LOCALE}>
-          <Router history={this.historyStack}>
+          <div>
             {this.props.children}
-          </Router>
+          </div>
         </I18n.Provider>
       </Provider>
     );

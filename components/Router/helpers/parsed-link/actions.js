@@ -9,6 +9,7 @@ import flushTab from '@shopgate/pwa-core/commands/flushTab';
 import openPage from '@shopgate/pwa-core/commands/openPage';
 import popTabToRoot from '@shopgate/pwa-core/commands/popTabToRoot';
 import showTab from '@shopgate/pwa-core/commands/showTab';
+import conductor from '@virtuous/conductor';
 import { getPageContext } from '../../../../helpers/legacy';
 import { isFunction } from '../../../../helpers/validation';
 
@@ -113,7 +114,7 @@ const reactRouter = (options, historyHandler) => {
     return;
   }
 
-  historyHandler.push(options.url);
+  conductor.push(options.url);
 };
 
 export default {

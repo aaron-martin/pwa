@@ -9,13 +9,6 @@ import {
   REQUEST_PAGE_CONFIG,
   RECEIVE_PAGE_CONFIG,
 } from '../../constants/ActionTypes';
-import { persist } from '../../store/persistent';
-
-/**
- * The current version of the state created by this reducer.
- * @type {string}
- */
-const STATE_VERSION = 'v1';
 
 /**
  * Enrich the widget data.
@@ -61,4 +54,4 @@ const page = (state = {}, action) => {
   }
 };
 
-export default persist('page', page, STATE_VERSION);
+export default page;

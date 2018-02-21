@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import conductor from '@virtuous/conductor';
 import appConfig from '../helpers/config';
 import redirectRoute from '../actions/history/redirectRoute';
 import resetHistory from '../actions/history/resetHistory';
@@ -15,6 +16,7 @@ import ParsedLink from '../components/Router/helpers/parsed-link';
 import {
   openedRegisterLink$,
   routeDidLeave,
+  navigate$,
 } from '../streams/history';
 import {
   userDidLogin$,
@@ -33,6 +35,25 @@ import {
  * @param {Function} subscribe The subscribe function.
  */
 export default function history(subscribe) {
+  /**
+   * Gets triggered when the intends to navigate.
+   */
+  subscribe(navigate$, ({ action }) => {
+    const { action: historyAction, location, state } = action;
+
+    if (historyAction === 'POP') {
+      conductor.pop();
+
+      // TODO: Take care when there is nothing to pop back to (replace to homepage?)
+    } else if (historyAction === 'PUSH') {
+      conductor.push(location, state);
+      // TODO: Take care when trying to push the same page location
+    } else if (historyAction === 'REPLACE') {
+      conductor.replace(location, state);
+      // TODO: Take care when trying to replace to the same page location
+    }
+  });
+
   /**
    * For the moment, we need to explicitly check for the Shopify webcheckout.
    * If it's there then we let that module handle the user login.
