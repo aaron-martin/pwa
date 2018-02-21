@@ -30,6 +30,11 @@ export default function product(subscribe) {
       baseProduct: getCurrentBaseProductFormatted(state),
     };
 
+    // Only track if the baseProduct is availbale too
+    if (trackingData.baseProduct) {
+      return;
+    }
+
     track('variantSelected', trackingData, state);
   });
 
