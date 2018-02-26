@@ -28,7 +28,30 @@ const getChildCategories = state => state.category.childrenByCategoryId;
  * @param {Object} state The application state.
  * @returns {Array} The root categories collection.
  */
-const getRootCategories = state => state.category.rootCategories;
+export const getRootCategoriesState = state => state.category.rootCategories;
+
+/**
+ * Retrieves the child categories for a specific parent category from the state.
+ * @param {Object} state The application state.
+ * @param {Object} props The component props.
+ * @returns {Object} The child categories state.
+ */
+export const getRootCategories = createSelector(
+  getRootCategoriesState,
+  getCategoryState,
+  (rootCategory, categoryState) => {
+    if (Object.keys(rootCategory).length === 0) {
+      return null;
+    }
+
+    const categories = rootCategory.categories.map(id => categoryState.categoriesById[id]);
+
+    return {
+      ...rootCategory,
+      categories,
+    };
+  }
+);
 
 /**
  * Retrieves the router params from the props.
