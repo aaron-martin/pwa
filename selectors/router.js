@@ -27,7 +27,7 @@ export const getRouterStack = state => getRouterState(state).stack;
  * @returns {string|null} The current search phrase.
  */
 export const getCurrentRoute = createSelector(
-  state => state.router.stack,
+  getRouterStack,
   (stack) => {
     if (!stack.length) {
       return null;
@@ -35,7 +35,9 @@ export const getCurrentRoute = createSelector(
 
     return stack[stack.length - 1];
   }
-);/**
+);
+
+/**
  * Retrieves the search phrase from the URL query parameters.
  * @param {Object} state The global state.
  * @returns {string|null} The current search phrase.
@@ -50,3 +52,20 @@ export const getCurrentPathname = createSelector(
     return route.pathname;
   }
 );
+
+/**
+ * Retrieves the search phrase from the URL query parameters.
+ * @param {Object} state The global state.
+ * @returns {Object|null} The current route state.
+ */
+export const getCurrentRouteTitle = createSelector(
+  getCurrentRoute,
+  (route) => {
+    if (!route || !route.state.title) {
+      return null;
+    }
+
+    return route.state.title;
+  }
+);
+

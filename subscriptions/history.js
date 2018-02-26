@@ -29,6 +29,7 @@ import {
   LOGIN_PATH,
   REGISTER_PATH,
 } from '../constants/RoutePaths';
+import { getCurrentPathname } from '../selectors/router';
 
 /**
  * History subscriptions.
@@ -38,19 +39,21 @@ export default function history(subscribe) {
   /**
    * Gets triggered when the intends to navigate.
    */
-  subscribe(navigate$, ({ action }) => {
+  subscribe(navigate$, ({ action, getState }) => {
     const { action: historyAction, location, state } = action;
+    const currentPathname = getCurrentPathname(getState());
 
     if (historyAction === 'POP') {
-      conductor.pop();
-
       // TODO: Take care when there is nothing to pop back to (replace to homepage?)
+      conductor.pop();
     } else if (historyAction === 'PUSH') {
-      conductor.push(location, state);
-      // TODO: Take care when trying to push the same page location
+      if (currentPathname !== location) {
+        conductor.push(location, state);
+      }
     } else if (historyAction === 'REPLACE') {
-      conductor.replace(location, state);
-      // TODO: Take care when trying to replace to the same page location
+      if (currentPathname !== location) {
+        conductor.replace(location, state);
+      }
     }
   });
 

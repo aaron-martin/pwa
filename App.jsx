@@ -15,9 +15,7 @@ import {
   appDidStart,
   appWillStart,
 } from './action-creators/app';
-import { syncHistoryWithStore } from './helpers/redux';
 import { history } from './helpers/router';
-import HistoryStack from './components/Router/helpers/HistoryStack';
 import fetchClientInformation from './actions/client/fetchClientInformation';
 import configureStore from './store';
 import I18n from './components/I18n';
@@ -60,15 +58,6 @@ class App extends PureComponent {
     syncRouter(this.store);
 
     this.store.dispatch(appWillStart(history.location));
-
-    // Start synchronization of the history stack.
-    this.historyStack = new HistoryStack({
-      key: 'root',
-      immutableKey: 'root',
-      ...history.location,
-    });
-    history.listen((location, action) =>
-      this.historyStack.applyChange(action, location));
   }
 
   /**
@@ -76,10 +65,6 @@ class App extends PureComponent {
    */
   componentDidMount() {
     this.store.dispatch(appDidStart());
-
-    // Start synchronization of history and redux store.
-    syncHistoryWithStore(history, this.store, this.historyStack);
-
     this.store.dispatch(fetchClientInformation());
   }
 
