@@ -19,6 +19,7 @@ const PROPERTIES = 'properties';
 const REVIEWS = 'reviews';
 const TAX_DISCLAIMER = 'tax-disclaimer';
 const CTAS = 'ctas';
+const ADD_TO_CART_CTA = 'add-to-cart-cta';
 const RATING = 'rating';
 const NAME = 'name';
 const INFO = 'info';
@@ -56,6 +57,11 @@ export const PRODUCT_HEADER_AFTER = `${PRODUCT}.${HEADER}.${AFTER}`;
 export const PRODUCT_CTAS_BEFORE = `${PRODUCT}.${CTAS}.${BEFORE}`;
 export const PRODUCT_CTAS = `${PRODUCT}.${CTAS}`;
 export const PRODUCT_CTAS_AFTER = `${PRODUCT}.${CTAS}.${AFTER}`;
+
+// AddToCartButton
+export const PRODUCT_ADD_TO_CART_CTA_BEFORE = `${PRODUCT}.${ADD_TO_CART_CTA}.${BEFORE}`;
+export const PRODUCT_ADD_TO_CART_CTA = `${PRODUCT}.${ADD_TO_CART_CTA}`;
+export const PRODUCT_ADD_TO_CART_CTA_AFTER = `${PRODUCT}.${ADD_TO_CART_CTA}.${AFTER}`;
 
 // RATING
 export const PRODUCT_RATING_BEFORE = `${PRODUCT}.${RATING}.${BEFORE}`;
