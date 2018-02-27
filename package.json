@@ -28,7 +28,6 @@
     "precommit"
   ],
   "dependencies": {
-    "react-hot-loader": "^3.0.0-beta.6",
     "recompose": "^0.26.0",
     "reselect": "^3.0.1"
   },
@@ -57,6 +56,7 @@
     "pre-commit": "^1.2.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-hot-loader": "^3.0.0-beta.6",
     "rimraf": "^2.6.2"
   }
 }
