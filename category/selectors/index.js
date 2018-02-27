@@ -44,6 +44,10 @@ export const getRootCategories = createSelector(
       return null;
     }
 
+    if (!rootCategory.categories) {
+      return null;
+    }
+
     const categories = rootCategory.categories.map(id => categoryState.categoriesById[id]);
 
     return {
