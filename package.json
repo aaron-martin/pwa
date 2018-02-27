@@ -79,13 +79,5 @@
     "react-transform-catch-errors": "^1.0.2",
     "redbox-react": "^1.5.0",
     "rimraf": "^2.6.2"
-  },
-  "peerDependencies": {
-    "react": "16.x",
-    "react-dom": "16.x",
-    "prop-types": "15.x",
-    "lodash": "4.x",
-    "@shopgate/react-hammerjs": "0.5.x",
-    "@shopgate/pwa-core": "1.2.x"
   }
 }
