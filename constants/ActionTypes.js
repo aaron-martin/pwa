@@ -21,6 +21,14 @@ export const WILL_REGISTER_LINK_EVENTS = 'WILL_REGISTER_LINK_EVENTS';
 export const DID_REGISTER_LINK_EVENTS = 'DID_REGISTER_LINK_EVENTS';
 
 /**
+ * ------- ROUTER -------
+ */
+export const ROUTE_WILL_ENTER = 'ROUTE_WILL_ENTER';
+export const ROUTE_DID_ENTER = 'ROUTE_DID_ENTER';
+export const ROUTE_WILL_LEAVE = 'ROUTE_WILL_LEAVE';
+export const ROUTE_DID_LEAVE = 'ROUTE_DID_LEAVE';
+
+/**
  * ------- MENU -------
  */
 export const REQUEST_MENU = 'REQUEST_MENU';

@@ -16,8 +16,8 @@ import ParsedLink from '../components/Router/helpers/parsed-link';
 import {
   openedRegisterLink$,
   routeDidLeave,
-  navigate$,
 } from '../streams/history';
+import { navigate$ } from '../streams/router';
 import {
   userDidLogin$,
   userDidLogout$,
