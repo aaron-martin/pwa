@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> should change the value on user input 1`] = `
+<Input
+  className=""
+  disabled={false}
+  onChange={[Function]}
+  onFocusChange={[Function]}
+  onSanitize={[Function]}
+  onValidate={[Function]}
+  password={false}
+  setRef={[Function]}
+  type="text"
+  validateOnBlur={true}
+  value="My initial value"
+>
+  <input
+    className=""
+    disabled={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value="My initial value"
+  />
+</Input>
+`;
+
+exports[`<Input /> should focus the input 1`] = `
+<Input
+  className=""
+  disabled={false}
+  onChange={[Function]}
+  onFocusChange={[Function]}
+  onSanitize={[Function]}
+  onValidate={[Function]}
+  password={false}
+  setRef={[Function]}
+  type="text"
+  validateOnBlur={true}
+  value=""
+>
+  <input
+    className=""
+    disabled={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value=""
+  />
+</Input>
+`;
+
+exports[`<Input /> should receive the correct value while typing 1`] = `
+<Input
+  className=""
+  disabled={false}
+  onChange={[Function]}
+  onFocusChange={[Function]}
+  onSanitize={[Function]}
+  onValidate={[Function]}
+  password={false}
+  setRef={[Function]}
+  type="text"
+  validateOnBlur={true}
+  value=""
+>
+  <input
+    className=""
+    disabled={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value="foobar"
+  />
+</Input>
+`;
+
+exports[`<Input /> should render a simple input field 1`] = `
+<Input
+  className=""
+  disabled={false}
+  onChange={[Function]}
+  onFocusChange={[Function]}
+  onSanitize={[Function]}
+  onValidate={[Function]}
+  password={false}
+  setRef={[Function]}
+  type="text"
+  validateOnBlur={true}
+  value=""
+>
+  <input
+    className=""
+    disabled={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value=""
+  />
+</Input>
+`;
+
+exports[`<Input /> should render the input as password 1`] = `
+<input
+  className=""
+  disabled={false}
+  onBlur={[Function]}
+  onChange={[Function]}
+  onFocus={[Function]}
+  type="password"
+  value=""
+/>
+`;
+
+exports[`<Input /> should render the input with a default value 1`] = `
+<input
+  className=""
+  disabled={false}
+  onBlur={[Function]}
+  onChange={[Function]}
+  onFocus={[Function]}
+  type="text"
+  value="FooBar"
+/>
+`;
+
+exports[`<Input /> should sanitize the input 1`] = `
+<Input
+  className=""
+  disabled={false}
+  onChange={[Function]}
+  onFocusChange={[Function]}
+  onSanitize={[Function]}
+  onValidate={[Function]}
+  password={false}
+  setRef={[Function]}
+  type="text"
+  validateOnBlur={true}
+  value=""
+>
+  <input
+    className=""
+    disabled={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value="FOOBAR"
+  />
+</Input>
+`;
+
+exports[`<Input /> should trigger the onChange callback 1`] = `
+<Input
+  className=""
+  disabled={false}
+  onChange={[Function]}
+  onFocusChange={[Function]}
+  onSanitize={[Function]}
+  onValidate={[Function]}
+  password={false}
+  setRef={[Function]}
+  type="text"
+  validateOnBlur={true}
+  value=""
+>
+  <input
+    className=""
+    disabled={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value="a"
+  />
+</Input>
+`;
+
+exports[`<Input /> should validate the input 1`] = `
+<input
+  className=""
+  disabled={false}
+  onBlur={[Function]}
+  onChange={[Function]}
+  onFocus={[Function]}
+  type="text"
+  value=""
+/>
+`;
