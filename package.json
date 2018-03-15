@@ -6,7 +6,13 @@
     "test": "lerna run test",
     "cover": "lerna run cover",
     "cover:report": "node ./scripts/send-coverage.js",
-    "lint": "eslint --ignore-path .gitignore --ignore-path .eslintignore  --ext .js --ext .jsx ."
+    "lint": "eslint --ignore-path .gitignore --ignore-path .eslintignore  --ext .js --ext .jsx .",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint"
+    ]
   },
   "workspaces": [
     "extensions/*/frontend",
@@ -15,9 +21,10 @@
     "utils/*"
   ],
   "devDependencies": {
-    "husky": "^0.15.0-rc.9",
+    "husky": "^0.14.3",
     "lerna": "^2.9.0",
-    "lerna-changelog": "^0.7.0"
+    "lerna-changelog": "^0.7.0",
+    "lint-staged": "^7.0.0"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -34,10 +41,5 @@
     "react-hot-loader": "3.1.3",
     "react-transform-catch-errors": "^1.0.2",
     "redbox-react": "^1.5.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
   }
 }
