@@ -3,7 +3,6 @@ import {
   HISTORY_PUSH_ACTION,
   HISTORY_SET_REDIRECT_LOCATION,
 } from '../../constants/ActionTypes';
-import { history } from '../../helpers/router';
 
 /**
  * Stores all the history information.
@@ -14,7 +13,7 @@ import { history } from '../../helpers/router';
 export default (
   state = {
     action: HISTORY_PUSH_ACTION,
-    pathname: history.location.pathname,
+    pathname: '/',
     queryParams: {},
     length: 1,
     redirectLocation: null,

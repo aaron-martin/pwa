@@ -2,8 +2,8 @@ import { logger, hasSGJavaScriptBridge } from '@shopgate/pwa-core/helpers';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import { applyWorker } from 'redux-worker';
 import { isDev, isRemote } from '../helpers/environment';
-import reducers from '../reducers';
 import observableMiddleware from './observable-middleware';
 import { initPersistentStorage } from './persistent';
 
@@ -30,41 +30,39 @@ if (isDev) {
   }
 }
 
+const reduxLogger = createLogger({
+  logger,
+  collapsed: true,
+  duration: true,
+});
+
 /**
  * Configures the redux store with all it's middleware and enhancers.
- * @param {Object} customReducers The custom reducers from the theme.
+ * @param {Object} reducers The reducers from the theme.
+ * @param {Function} Worker The web worker.
  * @return {Object} The redux store.
  */
-const configureStore = (customReducers = {}) => {
-  const middleware = [thunk];
-
-  // Add observable middleware.
-  middleware.push(observableMiddleware);
-
-  // Add logger to middleware.
-  middleware.push(createLogger({
-    logger,
-    collapsed: true,
-    duration: true,
-  }));
-
+const configureStore = (reducers, Worker) => {
   const store = createStore(
     // Append the reducers.
-    reducers(customReducers),
+    reducers,
     // Append the pre-loaded state.
     initPersistentStorage(),
     // Compose the enhancers.
-    composeEnhancers(applyMiddleware(...middleware))
+    composeEnhancers(
+      applyMiddleware(thunk, observableMiddleware, reduxLogger),
+      applyWorker(new Worker())
+    )
   );
 
-  // Do the HMR only if in development mode.
-  if (isDev && module.hot) {
-    // Enable Webpack hot module replacement for reducers.
-    module.hot.accept('../reducers', () => {
-      const nextReducers = require('../reducers').default; // eslint-disable-line global-require
-      store.replaceReducer(() => nextReducers(customReducers));
-    });
-  }
+  // // Do the HMR only if in development mode.
+  // If (isDev && module.hot) {
+  //   // Enable Webpack hot module replacement for reducers.
+  //   Module.hot.accept('../reducers', () => {
+  //     Const nextReducers = require('../reducers').default; // eslint-disable-line global-require
+  //     Store.replaceReducer(() => nextReducers(customReducers));
+  //   });
+  // }
 
   return store;
 };

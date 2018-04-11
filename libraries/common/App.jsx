@@ -26,12 +26,12 @@ class App extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     locale: PropTypes.shape().isRequired,
-    reducers: PropTypes.shape(),
+    reducers: PropTypes.func.isRequired,
+    Worker: PropTypes.func.isRequired,
     subscribers: PropTypes.arrayOf(PropTypes.func),
   };
 
   static defaultProps = {
-    reducers: {},
     subscribers: [],
   };
 
@@ -45,7 +45,7 @@ class App extends PureComponent {
     // Initialize the subscriptions to observable streams.
     initSubscribers(this.props.subscribers);
 
-    this.store = configureStore(props.reducers);
+    this.store = configureStore(props.reducers, props.Worker);
 
     syncRouter(this.store);
 
