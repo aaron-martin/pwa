@@ -30,6 +30,7 @@
     "history": "^4.7.2",
     "intl-messageformat": "^2.1.0",
     "jsdom": "11.1.0",
+    "localforage": "^1.7.1",
     "path-match": "^1.2.4",
     "react-dotdotdot": "^1.1.0",
     "react-id-swiper": "1.4.0",
