@@ -86,3 +86,12 @@ export const ERROR_USER = 'ERROR_USER';
 export const REQUEST_URL = 'REQUEST_URL';
 export const RECEIVE_URL = 'RECEIVE_URL';
 export const ERROR_URL = 'ERROR_URL';
+
+/**
+ * --------- ROUTER ------------
+ */
+export const ROUTE_WILL_ENTER = 'ROUTE_WILL_ENTER';
+export const ROUTE_DID_ENTER = 'ROUTE_DID_ENTER';
+export const ROUTE_WILL_LEAVE = 'ROUTE_WILL_LEAVE';
+export const ROUTE_DID_LEAVE = 'ROUTE_DID_LEAVE';
+export const NAVIGATE = 'NAVIGATE';

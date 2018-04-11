@@ -88,6 +88,45 @@
   version "9.4.7"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
 
+"@virtuous/conductor-events@^1.0.0-beta.12":
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@virtuous/conductor-events/-/conductor-events-1.0.0-beta.12.tgz#67f399720754b5bfcb064d560fa36e3122a61584"
+  dependencies:
+    "@virtuous/conductor" "^1.0.0-beta.12"
+
+"@virtuous/conductor-helpers@^1.0.0-beta.12":
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@virtuous/conductor-helpers/-/conductor-helpers-1.0.0-beta.12.tgz#f2ea728f79dfa353c0fe3fa7bca36376fde94441"
+  dependencies:
+    "@virtuous/conductor" "^1.0.0-beta.12"
+
+"@virtuous/conductor@^1.0.0-beta.12":
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@virtuous/conductor/-/conductor-1.0.0-beta.12.tgz#6da63c744e31a78fcd06a66f9c8d42ee83f17bd6"
+  dependencies:
+    history "^4.7.2"
+    path-match "^1.2.4"
+
+"@virtuous/react-conductor@^1.0.0-beta.12":
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@virtuous/react-conductor/-/react-conductor-1.0.0-beta.12.tgz#9dee1f29767854050253cb6fed07ebcb558260c5"
+  dependencies:
+    "@virtuous/conductor" "^1.0.0-beta.12"
+    "@virtuous/conductor-events" "^1.0.0-beta.12"
+    "@virtuous/conductor-helpers" "^1.0.0-beta.12"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-transition-group "^2.2.1"
+    uuid "^3.1.0"
+
+"@virtuous/redux-conductor@^1.0.0-beta.12":
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@virtuous/redux-conductor/-/redux-conductor-1.0.0-beta.12.tgz#390b552640540b89cc39acf29484db3e53b5a4ac"
+  dependencies:
+    "@virtuous/conductor" "^1.0.0-beta.12"
+    "@virtuous/conductor-events" "^1.0.0-beta.12"
+    "@virtuous/conductor-helpers" "^1.0.0-beta.12"
+
 JSONStream@^1.0.4:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.2.tgz#c102371b6ec3a7cf3b847ca00c20bb0fce4c6dea"

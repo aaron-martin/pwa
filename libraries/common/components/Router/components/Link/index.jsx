@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ParsedLink from '../../helpers/parsed-link';
+import connect from './connector';
 import style from './style';
 
 /**
@@ -8,44 +8,46 @@ import style from './style';
  * @param {Object} props Props for the component.
  * @returns {JSX}
  */
-export default class Link extends PureComponent {
+class Link extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     href: PropTypes.string.isRequired,
+    navigate: PropTypes.func.isRequired,
     className: PropTypes.string,
+    replace: PropTypes.bool,
+    state: PropTypes.shape(),
   };
 
   static defaultProps = {
     className: '',
+    replace: false,
+    state: {},
   };
 
   /**
    * Opens the link.
-   * @param {Object} e Event
    */
-  handleOpenLink = (e) => {
-    e.preventDefault();
-
-    const link = new ParsedLink(this.props.href);
-    link.open();
+  handleOpenLink = () => {
+    const action = this.props.replace ? 'REPLACE' : 'PUSH';
+    this.props.navigate(action, this.props.href, this.props.state);
   };
 
   /**
    * Renders the component.
-   * @returns {XML}
+   * @returns {JSX}
    */
   render() {
-    const { className, children } = this.props;
-
     return (
       <div
         aria-hidden
-        className={`${style} ${className}`}
+        className={`${style} ${this.props.className}`}
         onClick={this.handleOpenLink}
         role="link"
       >
-        {children}
+        {this.props.children}
       </div>
     );
   }
 }
+
+export default connect(Link);

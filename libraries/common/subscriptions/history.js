@@ -1,4 +1,5 @@
 import event from '@shopgate/pwa-core/classes/Event/index';
+import conductor from '@virtuous/conductor';
 import appConfig from '../helpers/config';
 import redirectRoute from '../actions/history/redirectRoute';
 import resetHistory from '../actions/history/resetHistory';
@@ -22,12 +23,34 @@ import {
   LOGIN_PATH,
   REGISTER_PATH,
 } from '../constants/RoutePaths';
+import { navigate$ } from '../streams/router';
+import { getCurrentPathname } from '../selectors/router';
 
 /**
  * History subscriptions.
  * @param {Function} subscribe The subscribe function.
  */
 export default function history(subscribe) {
+  /**
+   * Gets triggered when the intends to navigate.
+   */
+  subscribe(navigate$, ({ action, getState }) => {
+    const { action: historyAction, location, state } = action;
+    const currentPathname = getCurrentPathname(getState());
+
+    if (historyAction === 'POP') {
+      conductor.pop();
+    } else if (historyAction === 'PUSH') {
+      if (currentPathname !== location) {
+        conductor.push(location, state);
+      }
+    } else if (historyAction === 'REPLACE') {
+      if (currentPathname !== location) {
+        conductor.replace(location, state);
+      }
+    }
+  });
+
   /**
    * For the moment, we need to explicitly check for the Shopify webcheckout.
    * If it's there then we let that module handle the user login.

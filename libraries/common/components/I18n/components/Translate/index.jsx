@@ -27,7 +27,7 @@ const Translate = ({
   }
 
   if (!context.i18n) {
-    return <span className={className}>{string}</span>;
+    return string;
   }
 
   // When the input string is malformed, rather return the original string then raising an error.
@@ -57,9 +57,7 @@ const Translate = ({
     logger.error('i18n error for string %s', string, e);
   }
 
-  return (
-    <span className={className}>{formatted}</span>
-  );
+  return `${formatted}`;
 };
 
 Translate.propTypes = {
