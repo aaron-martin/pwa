@@ -63,7 +63,7 @@ const categoryDataLoaded$ = categoryRouteDidEnter$
  * Emits when a category's data is already available.
  */
 const categoryDataPreloaded$ = categoryIdChanged$
-  .filter(({ getState }) => getProductsResult(getState()).totalProductCount !== null);
+  .filter(({ getState }) => getProductsResult(getState(), {}).totalProductCount !== null);
 
 /**
  * Emits when a category or root category is ready to be tracked,

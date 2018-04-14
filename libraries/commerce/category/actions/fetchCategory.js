@@ -22,7 +22,7 @@ const fetchCategory = categoryId => (dispatch, getState) => {
      * So we need to check it (check happens inside fetchCategoryChildren).
      * This is the case if we got categories from getRootCategory
     */
-    dispatch(fetchCategoryChildren(categoryId));
+    // Dispatch(fetchCategoryChildren(categoryId));
     return;
   }
 

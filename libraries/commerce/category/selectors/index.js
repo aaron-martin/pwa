@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { hex2bin } from '@shopgate/pwa-common/helpers/data';
+import { getCurrentRoute } from '@shopgate/pwa-common/selectors/router';
 import { CATEGORY_PATH } from '../constants';
 
 /**
@@ -73,26 +74,13 @@ export const getRootCategories = createSelector(
  * @returns {string|null} The category ID.
  */
 export const getCurrentCategoryId = createSelector(
-  getParamsFromProps,
-  getSettingsFromProps,
-  state => (state.category ? state.category.currentCategoryId : null),
-  state => (state.history ? state.history.pathname : null),
-  (params, settings, categoryId, pathname) => {
-    if (params && params.categoryId) {
-      return hex2bin(params.categoryId) || null;
+  getCurrentRoute,
+  (stack) => {
+    if (!stack || !stack.state || !stack.state.categoryId) {
+      return null;
     }
 
-    if (settings && settings.categoryNumber) {
-      return settings.categoryNumber;
-    }
-
-    if (!categoryId) {
-      if (pathname && pathname.startsWith(CATEGORY_PATH)) {
-        return hex2bin(pathname.split('/')[2]) || null;
-      }
-    }
-
-    return categoryId;
+    return stack.state.categoryId;
   }
 );
 
@@ -114,7 +102,7 @@ const getCurrentChildCategories = createSelector(
  * @param {string} id The category ID.
  * @returns {Object} The dedicated category.
  */
-const getCategoryById = (categoryState, id) => categoryState.categoriesById[id];
+export const getCategoryById = (categoryState, id) => categoryState.categoriesById[id];
 
 /**
  * Retrieves the current category from the state.
@@ -124,7 +112,7 @@ const getCategoryById = (categoryState, id) => categoryState.categoriesById[id];
  */
 export const getCurrentCategory = createSelector(
   getCategoryState,
-  getCurrentCategoryId,
+  (state, props) => props.categoryId,
   (categoryState, categoryId) => getCategoryById(categoryState, categoryId) || null
 );
 
@@ -146,11 +134,10 @@ export const getCurrentCategoryChildCount = createSelector(
 export const getCurrentCategories = createSelector(
   getCategoryState,
   getCurrentCategoryId,
-  getRootCategoriesState,
   getCurrentChildCategories,
-  (categoryState, categoryId, rootCategories, childCategories) => {
-    if (!categoryId && rootCategories && rootCategories.categories) {
-      return rootCategories.categories.map(id => getCategoryById(categoryState, id));
+  (categoryState, categoryId, childCategories) => {
+    if (!categoryId) {
+      return null;
     }
 
     if (childCategories && childCategories.children) {
@@ -169,5 +156,20 @@ export const getCategoryProductCount = createSelector(
     }
 
     return category.productCount;
+  }
+);
+
+export const getChildCategoriesById = createSelector(
+  (state, props) => props.categoryId,
+  getCategoryState,
+  getChildCategories,
+  (categoryId, categoryState, childrenState) => {
+    const category = childrenState[categoryId];
+
+    if (!category || !category.children) {
+      return null;
+    }
+
+    return category.children.map(id => categoryState.categoriesById[id]);
   }
 );

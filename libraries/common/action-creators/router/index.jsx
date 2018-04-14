@@ -10,9 +10,11 @@ import {
  * @param {Object} id The id of the route.
  * @return {Object} The dispatched action object.
  */
-export const routeWillEnter = id => ({
+export const routeWillEnter = (route, action) => ({
   type: ROUTE_WILL_ENTER,
-  id,
+  id: route.id,
+  route,
+  action,
 });
 
 /**
@@ -20,9 +22,11 @@ export const routeWillEnter = id => ({
  * @param {Object} id The id of the route.
  * @return {Object} The dispatched action object.
  */
-export const routeDidEnter = id => ({
+export const routeDidEnter = (route, action) => ({
   type: ROUTE_DID_ENTER,
-  id,
+  id: route.id,
+  route,
+  action,
 });
 
 /**
@@ -30,9 +34,11 @@ export const routeDidEnter = id => ({
  * @param {Object} id The id of the route.
  * @return {Object} The dispatched action object.
  */
-export const routeWillLeave = id => ({
+export const routeWillLeave = (route, action) => ({
   type: ROUTE_WILL_LEAVE,
-  id,
+  id: route.id,
+  route,
+  action,
 });
 
 /**
@@ -40,7 +46,9 @@ export const routeWillLeave = id => ({
  * @param {Object} id The id of the route.
  * @return {Object} The dispatched action object.
  */
-export const routeDidLeave = id => ({
+export const routeDidLeave = (route, action) => ({
   type: ROUTE_DID_LEAVE,
-  id,
+  id: route.id,
+  route,
+  action,
 });

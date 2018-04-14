@@ -15,9 +15,9 @@ const fetchCategoryChildren = categoryId => (dispatch, getState) => {
   const state = getState();
   const category = state.category.childrenByCategoryId[categoryId];
 
-  if (!shouldFetchData(category, 'children')) {
-    return;
-  }
+  // If (!shouldFetchData(category, 'children')) {
+  //   Return;
+  // }
 
   dispatch(requestCategoryChildren(categoryId));
 

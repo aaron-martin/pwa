@@ -3,9 +3,12 @@ import {
   routeDidEnter,
   routeDidLeave,
 } from '@shopgate/pwa-common/streams/history';
+import getRouteById from '@virtuous/conductor-helpers/getRouteById';
+import { routeDidEnter$ } from '@shopgate/pwa-common/streams/router';
 import {
   CATEGORY_PATH,
   RECEIVE_ROOT_CATEGORIES,
+  RECEIVE_CATEGORY,
 } from '../constants';
 import { FILTER_PATH } from '../../filter/constants';
 
@@ -25,8 +28,18 @@ export const categoryRouteDidLeave$ = routeDidLeave(CATEGORY_PATH).filter(({ pat
 export const categoryRouteDidEnter$ = routeDidEnter(CATEGORY_PATH);
 
 /**
+ * Gets triggered  when the root category route is pushed.
+ * @type {Observable}
+ */
+export const categoryDidEnter$ = routeDidEnter$
+  .filter(({ action: { id } }) => getRouteById(id).pathname.includes('/category/'));
+
+/**
  * Gets triggered when the root categories received.
  */
 export const receivedRootCategories$ = main$.filter(({ action }) => (
   action.type === RECEIVE_ROOT_CATEGORIES
 ));
+
+export const categoryReceived$ = main$
+  .filter(({ action }) => action.type === RECEIVE_CATEGORY);
