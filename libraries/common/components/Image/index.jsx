@@ -81,6 +81,16 @@ class Image extends Component {
   }
 
   /**
+   * 
+   * @param {*} nextState 
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    return !this.state.loaded.every((item, index) => (
+      item === nextState.loaded[index]
+    ));
+  }
+
+  /**
    * When component was removed from DOM.
    */
   componentWillUnmount() {

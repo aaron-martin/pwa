@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import portalCollection from '../../helpers/portals/portalCollection';
 import { componentsConfig as config } from '../../helpers/config';
 
@@ -30,6 +31,18 @@ class Portal extends Component {
     this.state = {
       hasError: false,
     };
+  }
+
+  /**
+   * 
+   * @param {*} nextProps 
+   * @param {*} nextState 
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.state.hasError !== nextState.hasError
+      || !isEqual(this.props, nextProps)
+    );
   }
 
   /**
