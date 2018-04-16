@@ -20,7 +20,6 @@ const Translate = ({
   string,
   children,
   params,
-  className,
 }, context) => {
   if (typeof string !== 'string') {
     return string;
@@ -63,7 +62,6 @@ const Translate = ({
 Translate.propTypes = {
   string: PropTypes.node.isRequired,
   children: PropTypes.node,
-  className: PropTypes.string,
   params: PropTypes.oneOfType([
     PropTypes.shape(),
     PropTypes.array,
@@ -72,7 +70,6 @@ Translate.propTypes = {
 
 Translate.defaultProps = {
   children: null,
-  className: '',
   params: {},
 };
 
