@@ -134,7 +134,7 @@ export const getProductCurrency = (state) => {
  * @param {Object} props The component props.
  * @returns {string} The result hash.
  */
-const getResultHash = createSelector(
+export const getResultHash = createSelector(
   (state, props) => props.categoryId,
   getSearchPhrase,
   getSortOrder,
@@ -166,7 +166,7 @@ const getResultHash = createSelector(
  * @param {Object} props The component props.
  * @returns {Object} The result.
  */
-const getResultByHash = createSelector(
+export const getResultByHash = createSelector(
   state => state.product,
   getResultHash,
   (productState, hash) => productState.resultsByHash[hash]
@@ -416,5 +416,17 @@ export const isBaseProduct = createSelector(
         && productData.flags.hasVariants === false
       )
     );
+  }
+);
+
+export const getCategoryProductsById = createSelector(
+  state => state,
+  getResultByHash,
+  (state, results) => {
+    if (!results || !results.products || !results.products.length) {
+      return null;
+    }
+
+    return results.products.map(id => getProductById(state, id).productData);
   }
 );
