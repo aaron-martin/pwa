@@ -424,7 +424,7 @@ export const getCategoryProductsById = createSelector(
   getResultByHash,
   (state, results) => {
     if (!results || !results.products || !results.products.length) {
-      return null;
+      return [];
     }
 
     return results.products.map(id => getProductById(state, id).productData);

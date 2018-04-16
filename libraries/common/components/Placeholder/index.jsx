@@ -8,24 +8,33 @@ import styles from './style';
  * @returns {JSX}
  */
 const PlaceHolder = ({
-  height, left, top, width,
+  height,
+  left,
+  top,
+  width,
 }) => (
-    <div
-      className={styles}
-      style={{
-        height,
-        left,
-        top,
-        width,
-      }}
-    />
-  );
+  <div
+    className={styles}
+    style={{
+      height,
+      left,
+      top,
+      width,
+    }}
+  />
+);
 
 PlaceHolder.propTypes = {
-  height: PropTypes.number,
+  height: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   left: PropTypes.number,
   top: PropTypes.number,
-  width: PropTypes.number,
+  width: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 };
 
 PlaceHolder.defaultProps = {
