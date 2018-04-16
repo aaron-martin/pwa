@@ -12,17 +12,17 @@ import { getCurrentCategoryId } from '../selectors';
  * @return {Function} The dispatched action.
  */
 const fetchCategoryProducts =
-  (offset = 0, limit = ITEMS_PER_LOAD, sort) =>
+  (categoryId, offset = 0, limit = ITEMS_PER_LOAD, sort) =>
     (dispatch, getState) => {
       const state = getState();
-      const categoryId = getCurrentCategoryId(state);
+      // const categoryId = getCurrentCategoryId(state);
       const category = state.category.categoriesById[categoryId];
       const sortOrder = sort || getSortOrder(state);
 
-      if (!category) {
-        logger.error(`Category '${categoryId}' doesn't exist in the store. No products fetched.`);
-        return;
-      }
+      // if (!category) {
+      //   logger.error(`Category '${categoryId}' doesn't exist in the store. No products fetched.`);
+      //   return;
+      // }
 
       dispatch(getProducts({
         params: {

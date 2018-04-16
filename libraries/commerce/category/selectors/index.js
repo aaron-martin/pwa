@@ -173,3 +173,18 @@ export const getChildCategoriesById = createSelector(
     return category.children.map(id => categoryState.categoriesById[id]);
   }
 );
+
+// export const getChildCategoriesById = createSelector(
+//   (state, props) => props.categoryId,
+//   getCategoryState,
+//   getChildCategories,
+//   (categoryId, categoryState, childrenState) => {
+//     const category = childrenState[categoryId];
+
+//     if (!category || !category.children) {
+//       return null;
+//     }
+
+//     return category.children.map(id => categoryState.categoriesById[id]);
+//   }
+// );

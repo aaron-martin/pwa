@@ -88,17 +88,17 @@ const getProducts = ({
     }
 
     // Stop if we don't need to get any data.
-    if (!shouldFetchData(result, 'products', requiredProductCount)) {
-      const { products } = result;
+    // if (!shouldFetchData(result, 'products', requiredProductCount)) {
+    //   const { products } = result;
 
-      if (Array.isArray(products)) {
-        // Fire the onBeforeDispatch callback to inform a caller that getProducts will return data.
-        onBeforeDispatch();
-        return Promise.resolve(result);
-      }
+    //   if (Array.isArray(products)) {
+    //     // Fire the onBeforeDispatch callback to inform a caller that getProducts will return data.
+    //     onBeforeDispatch();
+    //     return Promise.resolve(result);
+    //   }
 
-      return null;
-    }
+    //   return null;
+    // }
 
     // Fire the onBeforeDispatch callback to inform a caller that getProducts will return data.
     onBeforeDispatch();
