@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import { getActualImageSource } from '../../helpers/data';
 import Transition from '../Transition';
 import styles from './style';
@@ -101,6 +102,10 @@ class Image extends Component {
     const { width, height } = this.props.resolutions[this.props.resolutions.length - 1];
 
     return ((height / width) * 100).toFixed(3);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !isEqual(this.state, nextState);
   }
 
   /**

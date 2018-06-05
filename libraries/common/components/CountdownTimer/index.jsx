@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import padStart from 'lodash/padStart';
 import I18n from '../I18n';
 
@@ -93,6 +94,13 @@ class CountdownTimer extends Component {
       this.remainingTime = this.getRemainingTime();
       this.updateTimer();
     }, 1000);
+  }
+
+  /**
+   * 
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    return !isEqual(this.state.formattedTime, nextState.formattedTime);
   }
 
   /**
