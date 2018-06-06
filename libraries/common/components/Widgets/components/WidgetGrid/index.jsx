@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import sortBy from 'lodash/sortBy';
-import shouldShowWidget from '../../helpers/shouldShowWidget';
+import filterAndSanitizeGridWidgets from '../../helpers/filterAndSanitizeGridWidgets';
 import Widget from '../Widget';
 import styles from './style';
 
@@ -27,17 +27,16 @@ const getMaxHeight = widgets => (
  * @returns {JSX} The widget grid.
  */
 const WidgetGrid = (props) => {
-  const rowCount = getMaxHeight(props.config);
+  // Sort the widgets by row. This has to happen to take care of the z-index flow.
+  const widgets = filterAndSanitizeGridWidgets(sortBy(props.config, ['row']));
+  const rowCount = getMaxHeight(widgets);
 
   // The cell size is 1/12 of the viewport width.
   const cellSize = Math.floor(window.innerWidth / GRID_COLUMNS);
 
-  if (!props.config || !rowCount) {
+  if (!widgets.length || !rowCount) {
     return null;
   }
-
-  // Sort the widgets by row. This has to happen to take care of the z-index flow.
-  const widgets = sortBy(props.config, ['row']);
 
   // The height of the widget area.
   const height = `${rowCount * cellSize}px`;
@@ -46,11 +45,6 @@ const WidgetGrid = (props) => {
     <div className={styles} style={{ height }}>
       {Object.keys(widgets).map((key) => {
         const widget = widgets[key];
-
-        if (!shouldShowWidget(widget.settings)) {
-          return null;
-        }
-
         const widgetKey = `w${key}`;
 
         // Map to the correct widget component using the `type` key inside the widget.
