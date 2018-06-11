@@ -16,25 +16,30 @@ import { getCurrentCategoryId } from '../../category/selectors';
 const getParamsFromProps = (_, props = {}) => props.params;
 
 /**
- * Gets the filters reducer.
  * @param {Object} state The application state.
  * @return {Object}
  */
-export const getFilters = state => state.filter;
+export const getFilterState = state => state.filter;
 
 /**
  * Gets the filter hash from the history state.
  * @param {Object} state The application state.
  * @returns {string}
  */
-export const getStoredFilterHash = state => state.filter.activeHash;
+export const getStoredFilterHash = createSelector(
+  getFilterState,
+  state => state.activeHash
+);
 
 /**
  * Gets all active filters stacks.
  * @param {Object} state The application state.
  * @returns {Array}
  */
-export const getActiveFiltersStack = state => getFilters(state).activeFilters;
+export const getActiveFiltersStack = createSelector(
+  getFilterState,
+  state => state.activeFilters
+);
 
 /**
  * Gets the currently active filters.
@@ -97,8 +102,9 @@ export const getFilterHash = createSelector(
  * @param {Object} state The current application state.
  * @return {Object}
  */
-export const getAvailableFiltersStack = state => (
-  getFilters(state).availableFilters
+export const getAvailableFiltersStack = createSelector(
+  getFilterState,
+  state => state.availableFilters
 );
 
 /**
@@ -133,8 +139,9 @@ export const hasActiveFilters = createSelector(
  * @param {Object} state The application state.
  * @returns {Object}
  */
-export const getTemporaryFilters = state => (
-  getFilters(state).temporaryFilters
+export const getTemporaryFilters = createSelector(
+  getFilterState,
+  state => state.temporaryFilters
 );
 
 /**
